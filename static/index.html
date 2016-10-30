@@ -1,146 +1,237 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
+<!--
+	Prologue by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
 <html ng-app="kurentoApp">
-<!--<html ng-app="kurentoApp">-->
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="cache-control" content="no-cache">
-    <meta http-equiv="pragma" content="no-cache">
-    <meta http-equiv="expires" content="0">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="shortcut icon" href="img/kurento.png" type="image/png"/>
+	<head>
+		<title>Prologue by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
 
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="bower_components/demo-console/index.css">
-    <link rel="stylesheet" href="bower_components/ekko-lightbox/dist/ekko-lightbox.min.css">
-    <link rel="stylesheet" href="css/kurento.css">
+      <!--Original kurento-->
+      <script src="bower_components/adapter.js/adapter.js"></script>
+      <script src="bower_components/jquery/dist/jquery.min.js"></script>
+      <script src="bower_components/angular/angular.min.js"></script>
+      <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+      <script src="bower_components/demo-console/index.js"></script>
+      <script src="bower_components/draggabilly/dist/draggabilly.pkgd.min.js"></script>
+      <script src="bower_components/ekko-lightbox/dist/ekko-lightbox.min.js"></script>
+      <script src="bower_components/kurento-utils/js/kurento-utils.js"></script>
+      <script src="app/main.js"></script>
 
-    <script src="bower_components/adapter.js/adapter.js"></script>
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="bower_components/angular/angular.min.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="bower_components/demo-console/index.js"></script>
-    <script src="bower_components/draggabilly/dist/draggabilly.pkgd.min.js"></script>
-    <script src="bower_components/ekko-lightbox/dist/ekko-lightbox.min.js"></script>
+	</head>
+	<body ng-controller="kurentoAppCtrl">
 
-    <script src="bower_components/kurento-utils/js/kurento-utils.js"></script>
+		<!-- Header -->
+			<div id="header">
 
-    <script src="js/index.js"></script>
-    <title>Kurento Tutorial 4: Video Call 1 to 1 with WebRTC</title>
-  </head>
-  <!--<body ng-controller="kurentoAppCtrl">-->
-  <body ng-controller="kurentoAppCtrl">
+				<div class="top">
 
-    <header>
-      <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"></button>
-            <a class="navbar-brand" href=".">Kurento Tutorial</a>
-          </div>
-          <div class="collapse navbar-collapse"
-            id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-              <li>
-                <a href="https://github.com/Kurento/kurento-tutorial-node/tree/develop/kurento-one2one-call">
-                  <span class="glyphicon glyphicon-file"></span> Source Code</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </header>
+					<!-- Logo -->
+						<div id="logo">
+							<span class="image avatar48"><img src="images/avatar.jpg" alt="" /></span>
+							<h1 id="title">Jane Doe</h1>
+							<p>Hyperspace Engineer</p>
+						</div>
 
-    <div class="container">
-      <div class="page-header">
-        <h1>Tutorial 4: Video Call 1 to 1 with WebRTC</h1>
-        <p>
-          This web application consists on an one to one video call using <a
-            href="http://www.webrtc.org/">WebRTC</a>. In other words, this
-          application is similar to a phone but also with video. The <a
-            href="img/pipeline.png" data-toggle="lightbox"
-            data-title="Video Call 1 to 1 Media Pipeline"
-            data-footer="Two interconnected WebRtcEnpoints Media Elements">Media
-            Pipeline</a> is composed by two interconnected <i>WebRtcEndpoints</i>.
-          To run this demo follow these steps:
-        </p>
-        <ol>
-          <li>Open this page with a browser compliant with WebRTC (Chrome, Firefox).</li>
-          <li>Type a nick in the field <i>Name</i> and click on <i>Register</i>.</li>
-          <li>In a different machine (or a different tab in the same browser) follow the same procedure to register another user.</li>
-          <li>Type the name of the user to be called in the field <i>Peer</i> and click <i>Call</i>.</li>
-          <li>Grant the access to the camera and microphone for both users. After the SDP negotiation the communication should start.</li>
-          <li>The called user should accept the incoming call (by a confirmation dialog).</li>
-          <li>Click on <i>Stop</i> to finish the communication.</li>
-        </ol>
-      </div>
-      <div class="row">
-        <div class="col-md-5">
-          <label class="control-label" for="name">Name</label>
-          <div class="row">
-            <div class="col-md-6">
-              <input id="name" name="name" class="form-control" type="text"/>
-            </div>
-            <div class="col-md-6 text-right">
-              <a id="register" href="#" class="btn btn-primary" ng-click="register()">
-                <span class="glyphicon glyphicon-plus"></span> Register</a>
-            </div>
-          </div>
-          <br/>
-          <br/>
-          <label class="control-label" for="peer">Peer</label>
-          <div class="row">
-            <div class="col-md-6">
-              <input id="peer" name="peer" class="form-control" type="text">
-            </div>
-            <div class="col-md-6 text-right">
-              <a id="call" href="#" class="btn btn-success" ng-click="call()">
-                <span class="glyphicon glyphicon-play"></span> Call</a>
-              <a id="terminate" href="#" class="btn btn-danger" ng-click="stop()">
-                <span class="glyphicon glyphicon-stop"></span> Stop</a>
-            </div>
-          </div>
-          <br/>
-          <label class="control-label" for="console">Console</label><br><br>
-          <div id="console" class="democonsole">
-            <ul></ul>
-          </div>
-        </div>
-        <div class="col-md-7">
-          <div id="videoBig">
-            <video id="videoOutput" autoplay width="640px" height="480px" ></video>
-          </div>
-          <div id="videoSmall">
-            <video id="videoInput" autoplay width="240px" height="180px" ></video>
-          </div>
-        </div>
-      </div>
-    </div>
+					<!-- Nav -->
+						<nav id="nav">
+							<!--
 
-    <footer>
-      <div class="foot-fixed-bottom">
-        <div class="container text-center">
-          <hr/>
-          <div class="row">&copy; 2014-2015 Kurento</div>
-          <div class="row">
-            <div class="col-md-4">
-              <a href="http://www.urjc.es">
-                <img src="img/urjc.gif" alt="Universidad Rey Juan Carlos" height="50px"/>
-              </a>
-            </div>
-            <div class="col-md-4">
-              <a href="http://www.kurento.org">
-                <img src="img/kurento.png" alt="Kurento" height="50px"/>
-              </a>
-            </div>
-            <div class="col-md-4">
-              <a href="http://www.naevatec.com">
-                <img src="img/naevatec.png" alt="Naevatec" height="50px"/>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
+								Prologue's nav expects links in one of two formats:
 
-  </body>
+								1. Hash link (scrolls to a different section within the page)
+
+								   <li><a href="#foobar" id="foobar-link" class="icon fa-whatever-icon-you-want skel-layers-ignoreHref"><span class="label">Foobar</span></a></li>
+
+								2. Standard link (sends the user to another page/site)
+
+								   <li><a href="http://foobar.tld" id="foobar-link" class="icon fa-whatever-icon-you-want"><span class="label">Foobar</span></a></li>
+
+							-->
+							<ul>
+								<li><a href="#top" id="top-link" class="skel-layers-ignoreHref"><span class="icon fa-home">Intro</span></a></li>
+								<li><a href="#portfolio" id="portfolio-link" class="skel-layers-ignoreHref"><span class="icon fa-th">Portfolio</span></a></li>
+								<li><a href="#about" id="about-link" class="skel-layers-ignoreHref"><span class="icon fa-user">About Me</span></a></li>
+								<li><a href="#contact" id="contact-link" class="skel-layers-ignoreHref"><span class="icon fa-envelope">Contact</span></a></li>
+							</ul>
+						</nav>
+
+				</div>
+
+				<div class="bottom">
+
+					<!-- Social Icons -->
+						<ul class="icons">
+							<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+							<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+							<li><a href="#" class="icon fa-github"><span class="label">Github</span></a></li>
+							<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+							<li><a href="#" class="icon fa-envelope"><span class="label">Email</span></a></li>
+						</ul>
+
+				</div>
+
+			</div>
+
+		<!-- Main -->
+			<div id="main">
+
+				<!-- Intro -->
+					<section id="top" class="one dark cover">
+						<div class="container">
+
+							<header>
+								<h2 class="alt">Hi! I'm <strong>Prologue</strong>, a <a href="http://html5up.net/license">free</a> responsive<br />
+								site template designed by <a href="http://html5up.net">HTML5 UP</a>.</h2>
+								<p>Ligula scelerisque justo sem accumsan diam quis<br />
+								vitae natoque dictum sollicitudin elementum.</p>
+							</header>
+
+							<footer>
+								<a href="#portfolio" class="button scrolly">Magna Aliquam</a>
+							</footer>
+
+						</div>
+					</section>
+
+				<!-- Portfolio -->
+					<section id="portfolio" class="two">
+						<div class="container">
+
+							<header>
+								<h2>Portfolio</h2>
+							</header>
+
+							<p>Vitae natoque dictum etiam semper magnis enim feugiat convallis convallis
+							egestas rhoncus ridiculus in quis risus amet curabitur tempor orci penatibus.
+							Tellus erat mauris ipsum fermentum etiam vivamus eget. Nunc nibh morbi quis
+							fusce hendrerit lacus ridiculus.</p>
+
+							<div class="row">
+								<div class="4u 12u$(mobile)">
+									<article class="item">
+										<a href="#" class="image fit"><img src="images/pic02.jpg" alt="" /></a>
+										<header>
+											<h3>Ipsum Feugiat</h3>
+										</header>
+									</article>
+									<article class="item">
+										<a href="#" class="image fit"><img src="images/pic03.jpg" alt="" /></a>
+										<header>
+											<h3>Rhoncus Semper</h3>
+										</header>
+									</article>
+								</div>
+								<div class="4u 12u$(mobile)">
+									<article class="item">
+										<a href="#" class="image fit"><img src="images/pic04.jpg" alt="" /></a>
+										<header>
+											<h3>Magna Nullam</h3>
+										</header>
+									</article>
+									<article class="item">
+										<a href="#" class="image fit"><img src="images/pic05.jpg" alt="" /></a>
+										<header>
+											<h3>Natoque Vitae</h3>
+										</header>
+									</article>
+								</div>
+								<div class="4u$ 12u$(mobile)">
+									<article class="item">
+										<a href="#" class="image fit"><img src="images/pic06.jpg" alt="" /></a>
+										<header>
+											<h3>Dolor Penatibus</h3>
+										</header>
+									</article>
+									<article class="item">
+										<a href="#" class="image fit"><img src="images/pic07.jpg" alt="" /></a>
+										<header>
+											<h3>Orci Convallis</h3>
+										</header>
+									</article>
+								</div>
+							</div>
+
+						</div>
+					</section>
+
+				<!-- About Me -->
+					<section id="about" class="three">
+						<div class="container">
+
+							<header>
+								<h2>About Me</h2>
+							</header>
+
+							<a href="#" class="image featured"><img src="images/pic08.jpg" alt="" /></a>
+
+							<p>Tincidunt eu elit diam magnis pretium accumsan etiam id urna. Ridiculus
+							ultricies curae quis et rhoncus velit. Lobortis elementum aliquet nec vitae
+							laoreet eget cubilia quam non etiam odio tincidunt montes. Elementum sem
+							parturient nulla quam placerat viverra mauris non cum elit tempus ullamcorper
+							dolor. Libero rutrum ut lacinia donec curae mus vel quisque sociis nec
+							ornare iaculis.</p>
+
+						</div>
+					</section>
+
+				<!-- Contact -->
+					<section id="contact" class="four">
+						<div class="container">
+
+							<header>
+								<h2>Contact</h2>
+							</header>
+
+							<p>Elementum sem parturient nulla quam placerat viverra
+							mauris non cum elit tempus ullamcorper dolor. Libero rutrum ut lacinia
+							donec curae mus. Eleifend id porttitor ac ultricies lobortis sem nunc
+							orci ridiculus faucibus a consectetur. Porttitor curae mauris urna mi dolor.</p>
+
+							<form method="post" action="#">
+								<div class="row">
+									<div class="6u 12u$(mobile)"><input type="text" name="name" placeholder="Name" /></div>
+									<div class="6u$ 12u$(mobile)"><input type="text" name="email" placeholder="Email" /></div>
+									<div class="12u$">
+										<textarea name="message" placeholder="Message"></textarea>
+									</div>
+									<div class="12u$">
+										<input type="submit" value="Send Message" />
+									</div>
+								</div>
+							</form>
+
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Footer -->
+			<div id="footer">
+
+				<!-- Copyright -->
+					<ul class="copyright">
+						<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="node_modules/jquery/dist/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.scrollzer.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/structure.js"></script>
+
+	</body>
 </html>

@@ -1,18 +1,21 @@
-var ws = new WebSocket('wss://' + location.host + '/one2one');
-var videoInput;
-var videoOutput;
-var webRtcPeer;
-videoInput = document.getElementById('videoInput');
-videoOutput = document.getElementById('videoOutput');
+// var ws = new WebSocket('wss://' + location.host + '/one2one');
+// var videoInput;
+// var videoOutput;
+// var webRtcPeer;
+// videoInput = document.getElementById('videoInput');
+// console.log(videoInput)
+// videoOutput = document.getElementById('videoOutput');
 
 
 var kurentoApp = angular.module('kurentoApp',[])
 	.controller('kurentoAppCtrl', function ($scope) {
 
-		// var ws = new WebSocket('wss://' + location.host + '/one2one');
-		// var videoInput;
-		// var videoOutput;
-		// var webRtcPeer;
+		var ws = new WebSocket('wss://' + location.host + '/one2one');
+		var videoInput;
+		var videoOutput;
+		var webRtcPeer;
+		videoInput = document.getElementById('videoInput');
+		videoOutput = document.getElementById('videoOutput');
 
 		var registerName = null;
 		const NOT_REGISTERED = 0;
@@ -69,24 +72,24 @@ var kurentoApp = angular.module('kurentoApp',[])
 			callState = nextState;
 		}
 
-		window.onload = function() {
-			console = new Console();
-			setRegisterState(NOT_REGISTERED);
-			var drag = new Draggabilly(document.getElementById('videoSmall'));
-			videoInput = document.getElementById('videoInput');
-			videoOutput = document.getElementById('videoOutput');
-			document.getElementById('name').focus();
-
-			document.getElementById('register').addEventListener('click', function() {
-				register();
-			});
-			document.getElementById('call').addEventListener('click', function() {
-				call();
-			});
-			document.getElementById('terminate').addEventListener('click', function() {
-				stop();
-			});
-		}
+		// window.onload = function() {
+		// 	console = new Console();
+		// 	setRegisterState(NOT_REGISTERED);
+		// 	var drag = new Draggabilly(document.getElementById('videoSmall'));
+		// 	videoInput = document.getElementById('videoInput');
+		// 	videoOutput = document.getElementById('videoOutput');
+		// 	document.getElementById('name').focus();
+        //
+		// 	document.getElementById('register').addEventListener('click', function() {
+		// 		register();
+		// 	});
+		// 	document.getElementById('call').addEventListener('click', function() {
+		// 		call();
+		// 	});
+		// 	document.getElementById('terminate').addEventListener('click', function() {
+		// 		stop();
+		// 	});
+		// }
 
 		window.onbeforeunload = function() {
 			ws.close();
