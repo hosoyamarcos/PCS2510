@@ -427,9 +427,16 @@ function register(id, name, ws, callback) {
     }
 
     userRegistry.register(new UserSession(id, name, ws));
+
+    var allUsers =[];
+    for (var i in userRegistry.usersByName) {
+        allUsers.push(i)
+    }
+
     try {
-        ws.send(JSON.stringify({id: 'registerResponse', response: 'accepted'}));
+        ws.send(JSON.stringify({id: 'registerResponse', response: 'accepted', allUsers: allUsers}));
     } catch(exception) {
+        console.log('ERROR')
         onError(exception);
     }
 }

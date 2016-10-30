@@ -9,13 +9,13 @@
 
 var kurentoApp = angular.module('kurentoApp',[])
 	.controller('kurentoAppCtrl', function ($scope) {
-
 		var ws = new WebSocket('wss://' + location.host + '/one2one');
 		var videoInput;
 		var videoOutput;
 		var webRtcPeer;
 		videoInput = document.getElementById('videoInput');
 		videoOutput = document.getElementById('videoOutput');
+		$scope.allUsersList = [];
 
 		var registerName = null;
 		const NOT_REGISTERED = 0;
@@ -127,6 +127,7 @@ var kurentoApp = angular.module('kurentoApp',[])
 		function resgisterResponse(message) {
 			if (message.response == 'accepted') {
 				setRegisterState(REGISTERED);
+
 			} else {
 				setRegisterState(NOT_REGISTERED);
 				var errorMessage = message.message ? message.message
@@ -213,7 +214,7 @@ var kurentoApp = angular.module('kurentoApp',[])
 		}
 
 		$scope.register = function () {
-			var name = document.getElementById('name').value;
+			var name = $scope.name;
 			if (name == '') {
 				window.alert("You must insert your user name");
 				return;
@@ -226,11 +227,11 @@ var kurentoApp = angular.module('kurentoApp',[])
 				name : name
 			};
 			sendMessage(message);
-			document.getElementById('peer').focus();
+			// $scope.peer;
 		}
 
 		$scope.call = function () {
-			if (document.getElementById('peer').value == '') {
+			if (!$scope.peer) {
 				window.alert("You must specify the peer name");
 				return;
 			}
@@ -259,8 +260,8 @@ var kurentoApp = angular.module('kurentoApp',[])
 					}
 					var message = {
 						id : 'call',
-						from : document.getElementById('name').value,
-						to : document.getElementById('peer').value,
+						from : $scope.name,
+						to : $scope.peer,
 						sdpOffer : offerSdp
 					};
 					sendMessage(message);
