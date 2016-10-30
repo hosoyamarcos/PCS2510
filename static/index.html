@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="kurentoApp">
+<!--<html ng-app="kurentoApp">-->
   <head>
     <meta charset="utf-8">
     <meta http-equiv="cache-control" content="no-cache">
@@ -15,6 +16,7 @@
 
     <script src="bower_components/adapter.js/adapter.js"></script>
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="bower_components/demo-console/index.js"></script>
     <script src="bower_components/draggabilly/dist/draggabilly.pkgd.min.js"></script>
@@ -25,7 +27,8 @@
     <script src="js/index.js"></script>
     <title>Kurento Tutorial 4: Video Call 1 to 1 with WebRTC</title>
   </head>
-  <body>
+  <!--<body ng-controller="kurentoAppCtrl">-->
+  <body ng-controller="kurentoAppCtrl">
 
     <header>
       <div class="navbar navbar-inverse navbar-fixed-top">
@@ -78,7 +81,7 @@
               <input id="name" name="name" class="form-control" type="text"/>
             </div>
             <div class="col-md-6 text-right">
-              <a id="register" href="#" class="btn btn-primary">
+              <a id="register" href="#" class="btn btn-primary" ng-click="register()">
                 <span class="glyphicon glyphicon-plus"></span> Register</a>
             </div>
           </div>
@@ -90,9 +93,9 @@
               <input id="peer" name="peer" class="form-control" type="text">
             </div>
             <div class="col-md-6 text-right">
-              <a id="call" href="#" class="btn btn-success">
+              <a id="call" href="#" class="btn btn-success" ng-click="call()">
                 <span class="glyphicon glyphicon-play"></span> Call</a>
-              <a id="terminate" href="#" class="btn btn-danger">
+              <a id="terminate" href="#" class="btn btn-danger" ng-click="stop()">
                 <span class="glyphicon glyphicon-stop"></span> Stop</a>
             </div>
           </div>
@@ -104,10 +107,10 @@
         </div>
         <div class="col-md-7">
           <div id="videoBig">
-            <video id="videoOutput" autoplay width="640px" height="480px" poster="img/webrtc.png"></video>
+            <video id="videoOutput" autoplay width="640px" height="480px" ></video>
           </div>
           <div id="videoSmall">
-            <video id="videoInput" autoplay width="240px" height="180px" poster="img/webrtc.png"></video>
+            <video id="videoInput" autoplay width="240px" height="180px" ></video>
           </div>
         </div>
       </div>
