@@ -30,7 +30,7 @@
 
 					<!-- Logo -->
 						<div id="logo">
-							<span class="image avatar48"><img src="images/avatar.jpg" alt="" /></span>
+							<span class="image avatar48"><img src="images/video.png" alt="" /></span>
 							<h1 id="title">Projeto PCS2510</h1>
 							<p>Using WebRTC</p>
 						</div>
@@ -66,7 +66,7 @@
 						<ul class="icons">
 							<!--<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>-->
 							<!--<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>-->
-							<li><a href="#" class="icon fa-github"><span class="label">Github</span></a></li>
+							<li><a href="https://github.com/hosoyamarcos/PCS2510.git" class="icon fa-github"><span class="label">Github</span></a></li>
 							<!--<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>-->
 							<!--<li><a href="#" class="icon fa-envelope"><span class="label">Email</span></a></li>-->
 						</ul>
@@ -87,12 +87,15 @@
 									<label>Username</label>
 									<input type="text" placeholder="Register your username ..." ng-model="name">
 								</div>
-								<button type="submit" class="btn btn-default" ng-click="register()">Register</button>
+								<br>
+								<a class="button" class="button" ng-click="register()">Register</a>
+								<!--<button type="submit" class="btn btn-default" ng-click="register()">Register</button>-->
 
 								<div class="form-group" >
 									<label>Peer</label>
 									<input type="text" placeholder="Who would you like to call? " ng-model="peer">
 								</div>
+								<br>
 
 								<a href="#chat" class="button" ng-click="call()">Call</a>
 								<a class="button" ng-click="stop()">Stop</a>
@@ -177,7 +180,7 @@
 
 				<!-- Copyright -->
 					<ul class="copyright">
-						<li>Open source</li><li>Git <a href="https://github.com/hosoyamarcos/PCS2510.git">clone</a></li>
+						<li><i class="fa fa-comments" aria-hidden="true"></i></li><li><a href="https://github.com/hosoyamarcos/PCS2510.git">Repository</a></li>
 					</ul>
 
 			</div>
