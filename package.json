@@ -2,13 +2,10 @@
   "name": "kurento-one2one-call",
   "version": "6.6.1-dev",
   "private": true,
-  "scripts": {
-    "postinstall": "cd static && bower install"
-  },
   "dependencies": {
     "angular": "^1.5.8",
     "express": "~4.12.4",
-    "kurento-client": "Kurento/kurento-client-js",
+    "kurento-client": "~6.6.0",
     "minimist": "^1.1.1",
     "ws": "~1.0.1"
   },
