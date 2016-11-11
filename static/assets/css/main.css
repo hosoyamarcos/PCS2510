@@ -2558,3 +2558,20 @@
 				}
 
 	}
+
+#videoBig {
+
+	top: 0;
+	left: 0;
+	z-index: 1;
+}
+
+div#videoSmall {
+
+	padding: 0px;
+	top: 15px;
+	left: 400px;
+	cursor: pointer;
+	z-index: 10;
+	padding: 0px;
+}

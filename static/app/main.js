@@ -1,12 +1,3 @@
-// var ws = new WebSocket('wss://' + location.host + '/one2one');
-// var videoInput;
-// var videoOutput;
-// var webRtcPeer;
-// videoInput = document.getElementById('videoInput');
-// console.log(videoInput)
-// videoOutput = document.getElementById('videoOutput');
-
-
 var kurentoApp = angular.module('kurentoApp',[])
 	.controller('kurentoAppCtrl', function ($scope) {
 		var ws = new WebSocket('wss://' + location.host + '/one2one');
@@ -133,6 +124,8 @@ var kurentoApp = angular.module('kurentoApp',[])
 				var errorMessage = message.message ? message.message
 					: 'Unknown reason for register rejection.';
 				console.log(errorMessage);
+				swal("Oh oh ...", 'Error registering user.', "error")
+				return;
 				alert('Error registering user. See console for further information.');
 			}
 		}
@@ -169,54 +162,109 @@ var kurentoApp = angular.module('kurentoApp',[])
 			}
 
 			setCallState(PROCESSING_CALL);
-			if (confirm('User ' + message.from
-					+ ' is calling you. Do you accept the call?')) {
-				//showSpinner(videoInput, videoOutput);
+			var userCalling = 'User'  + message.from + ' is calling you';
 
-				var options = {
-					localVideo : videoInput,
-					remoteVideo : videoOutput,
-					onicecandidate : onIceCandidate
-				}
-
-				webRtcPeer = kurentoUtils.WebRtcPeer.WebRtcPeerSendrecv(options,
-					function(error) {
-						if (error) {
-							console.error(error);
-							setCallState(NO_CALL);
+			swal({
+					title: "Do you accept the call?",
+					text: userCalling,
+					type: "warning",
+					showCancelButton: true,
+					confirmButtonColor: "#DD6B55",
+					confirmButtonText: "Yes, accept!",
+					cancelButtonText: "No, cancel",
+					closeOnConfirm: true,
+					closeOnCancel: true
+				},
+				function(isConfirm){
+					if (isConfirm) {
+						var options = {
+							localVideo : videoInput,
+							remoteVideo : videoOutput,
+							onicecandidate : onIceCandidate
 						}
 
-						this.generateOffer(function(error, offerSdp) {
-							if (error) {
-								console.error(error);
-								setCallState(NO_CALL);
-							}
-							var response = {
-								id : 'incomingCallResponse',
-								from : message.from,
-								callResponse : 'accept',
-								sdpOffer : offerSdp
-							};
-							sendMessage(response);
-						});
-					});
+						webRtcPeer = kurentoUtils.WebRtcPeer.WebRtcPeerSendrecv(options,
+							function(error) {
+								if (error) {
+									console.error(error);
+									setCallState(NO_CALL);
+								}
 
-			} else {
-				var response = {
-					id : 'incomingCallResponse',
-					from : message.from,
-					callResponse : 'reject',
-					message : 'user declined'
-				};
-				sendMessage(response);
-				stop(true);
-			}
+								this.generateOffer(function(error, offerSdp) {
+									if (error) {
+										console.error(error);
+										setCallState(NO_CALL);
+									}
+									var response = {
+										id : 'incomingCallResponse',
+										from : message.from,
+										callResponse : 'accept',
+										sdpOffer : offerSdp
+									};
+									sendMessage(response);
+								});
+							});
+
+					} else {
+						var response = {
+							id : 'incomingCallResponse',
+							from : message.from,
+							callResponse : 'reject',
+							message : 'user declined'
+						};
+						sendMessage(response);
+						stop(true);
+					}
+				});
+
+			// if (confirm('User ' + message.from
+			// 		+ ' is calling you. Do you accept the call?')) {
+			// 	//showSpinner(videoInput, videoOutput);
+            //
+			// 	var options = {
+			// 		localVideo : videoInput,
+			// 		remoteVideo : videoOutput,
+			// 		onicecandidate : onIceCandidate
+			// 	}
+            //
+			// 	webRtcPeer = kurentoUtils.WebRtcPeer.WebRtcPeerSendrecv(options,
+			// 		function(error) {
+			// 			if (error) {
+			// 				console.error(error);
+			// 				setCallState(NO_CALL);
+			// 			}
+            //
+			// 			this.generateOffer(function(error, offerSdp) {
+			// 				if (error) {
+			// 					console.error(error);
+			// 					setCallState(NO_CALL);
+			// 				}
+			// 				var response = {
+			// 					id : 'incomingCallResponse',
+			// 					from : message.from,
+			// 					callResponse : 'accept',
+			// 					sdpOffer : offerSdp
+			// 				};
+			// 				sendMessage(response);
+			// 			});
+			// 		});
+            //
+			// } else {
+			// 	var response = {
+			// 		id : 'incomingCallResponse',
+			// 		from : message.from,
+			// 		callResponse : 'reject',
+			// 		message : 'user declined'
+			// 	};
+			// 	sendMessage(response);
+			// 	stop(true);
+			// }
 		}
 
 		$scope.register = function () {
 			var name = $scope.name;
 			if (name == '') {
-				window.alert("You must insert your user name");
+				swal("Oh oh ...", "You must insert you user name", "error")
 				return;
 			}
 
@@ -232,7 +280,7 @@ var kurentoApp = angular.module('kurentoApp',[])
 
 		$scope.call = function () {
 			if (!$scope.peer) {
-				window.alert("You must specify the peer name");
+				swal("Oh oh ...", "You must insert the peer name", "error")
 				return;
 			}
 
