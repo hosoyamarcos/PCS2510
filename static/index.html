@@ -9,189 +9,200 @@
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
 		<link rel="stylesheet" href="bower_components/sweetalert/dist/sweetalert.css">
+		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css">
 
       <script src="bower_components/adapter.js/adapter.js"></script>
       <script src="bower_components/jquery/dist/jquery.min.js"></script>
       <script src="bower_components/angular/angular.min.js"></script>
+		<script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
       <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
       <script src="bower_components/demo-console/index.js"></script>
       <script src="bower_components/draggabilly/dist/draggabilly.pkgd.min.js"></script>
       <script src="bower_components/ekko-lightbox/dist/ekko-lightbox.min.js"></script>
       <script src="bower_components/kurento-utils/js/kurento-utils.js"></script>
 	  <script src="bower_components/sweetalert/dist/sweetalert.min.js"></script>
-      <script src="app/main.js"></script>
+		<script src="app/config.js"></script>
+      <!--<script src="app/main.js"></script>-->
 
 	</head>
-	<body ng-app="kurentoApp" ng-controller="kurentoAppCtrl">
+	<!--<body ng-app="kurentoApp" ng-controller="kurentoAppCtrl">-->
+	<body ng-app="kurentoApp">
 
-		<!-- Header -->
-			<div id="header">
+	<!-- MAIN CONTENT -->
+	<div class="container">
+		<!-- THIS IS WHERE WE WILL INJECT OUR CONTENT ============================== -->
+		<div ui-view></div>
+	</div>
 
-				<div class="top">
+		<!--&lt;!&ndash; Header &ndash;&gt;-->
+			<!--<div id="header">-->
 
-					<!-- Logo -->
-						<div id="logo">
-							<span class="image avatar48"><img src="images/video.png" alt="" /></span>
-							<h1 id="title">Projeto PCS2510</h1>
-							<p>Using WebRTC</p>
-						</div>
+				<!--<div class="top">-->
 
-					<!-- Nav -->
-						<nav id="nav">
-							<!--
-
-								Prologue's nav expects links in one of two formats:
-
-								1. Hash link (scrolls to a different section within the page)
-
-								   <li><a href="#foobar" id="foobar-link" class="icon fa-whatever-icon-you-want skel-layers-ignoreHref"><span class="label">Foobar</span></a></li>
-
-								2. Standard link (sends the user to another page/site)
-
-								   <li><a href="http://foobar.tld" id="foobar-link" class="icon fa-whatever-icon-you-want"><span class="label">Foobar</span></a></li>
-
-							-->
-							<ul>
-								<li><a href="#top" id="top-link" class="skel-layers-ignoreHref"><span class="icon fa-home">Intro</span></a></li>
-								<li><a href="#call" id="portfolio-link" class="skel-layers-ignoreHref"><span class="icon fa-th">Video Call</span></a></li>
-								<!--<li><a href="#about" id="about-link" class="skel-layers-ignoreHref"><span class="icon fa-user">About Me</span></a></li>-->
-								<!--<li><a href="#contact" id="contact-link" class="skel-layers-ignoreHref"><span class="icon fa-envelope">Contact</span></a></li>-->
-							</ul>
-						</nav>
-
-				</div>
-
-				<div class="bottom">
-
-					<!-- Social Icons -->
-						<ul class="icons">
-							<!--<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>-->
-							<!--<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>-->
-							<li><a href="https://github.com/hosoyamarcos/PCS2510.git" class="icon fa-github"><span class="label">Github</span></a></li>
-							<!--<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>-->
-							<!--<li><a href="#" class="icon fa-envelope"><span class="label">Email</span></a></li>-->
-						</ul>
-
-				</div>
-
-			</div>
-
-		<!-- Main -->
-			<div id="main">
-
-				<!-- Intro -->
-					<section id="top" class="one dark cover">
-						<div class="container">
-							<form class=>
-								<div class="form-group">
-									<label>Username</label>
-									<input type="text" placeholder="Register your username ..." ng-model="name">
-								</div>
-								<br>
-								<a class="button" class="button" ng-click="register()">Register</a>
-
-								<div class="form-group" >
-									<label>Peer</label>
-									<input type="text" placeholder="Who would you like to call? " ng-model="peer">
-								</div>
-								<br>
-
-								<a href="#chat" class="button" ng-click="call()">Call</a>
-								<a class="button" ng-click="stop()">Stop</a>
-							</form>
-						</div>
-					</section>
-
-				<!-- Portfolio -->
-					<section id="call" class="two">
-						<div class="container">
-
-							<header>
-								<h2>Video Call</h2>
-							</header>
-
-							<div class="col-sm-12 col-md-12" >
-								<div id="videoBig" class="pull-left">
-									<video id="videoOutput" autoplay width="640px" height="480px" ></video>
-								</div>
-								<div id="videoSmall">
-									<video muted id="videoInput" autoplay width="240px" height="180px" ></video>
-								</div>
-							</div>
-
-
-						</div>
-					</section>
-
-				<!-- About Me -->
-					<!--<section id="about" class="three">-->
-						<!--<div class="container">-->
-
-							<!--<header>-->
-								<!--<h2>About Me</h2>-->
-							<!--</header>-->
-
-							<!--<a href="#" class="image featured"><img src="images/pic08.jpg" alt="" /></a>-->
-
-							<!--<p>Tincidunt eu elit diam magnis pretium accumsan etiam id urna. Ridiculus-->
-							<!--ultricies curae quis et rhoncus velit. Lobortis elementum aliquet nec vitae-->
-							<!--laoreet eget cubilia quam non etiam odio tincidunt montes. Elementum sem-->
-							<!--parturient nulla quam placerat viverra mauris non cum elit tempus ullamcorper-->
-							<!--dolor. Libero rutrum ut lacinia donec curae mus vel quisque sociis nec-->
-							<!--ornare iaculis.</p>-->
-
+					<!--&lt;!&ndash; Logo &ndash;&gt;-->
+						<!--<div id="logo">-->
+							<!--<span class="image avatar48"><img src="images/video.png" alt="" /></span>-->
+							<!--<h1 id="title">Projeto PCS2510</h1>-->
+							<!--<p>Using WebRTC</p>-->
 						<!--</div>-->
-					<!--</section>-->
 
-				<!-- Contact -->
-					<!--<section id="contact" class="four">-->
+					<!--&lt;!&ndash; Nav &ndash;&gt;-->
+						<!--<nav id="nav">-->
+							<!--&lt;!&ndash;-->
+
+								<!--Prologue's nav expects links in one of two formats:-->
+
+								<!--1. Hash link (scrolls to a different section within the page)-->
+
+								   <!--<li><a href="#foobar" id="foobar-link" class="icon fa-whatever-icon-you-want skel-layers-ignoreHref"><span class="label">Foobar</span></a></li>-->
+
+								<!--2. Standard link (sends the user to another page/site)-->
+
+								   <!--<li><a href="http://foobar.tld" id="foobar-link" class="icon fa-whatever-icon-you-want"><span class="label">Foobar</span></a></li>-->
+
+							<!--&ndash;&gt;-->
+							<!--<ul>-->
+								<!--<li><a href="#top" id="top-link" class="skel-layers-ignoreHref"><span class="icon fa-home">Intro</span></a></li>-->
+								<!--<li><a href="#call" id="portfolio-link" class="skel-layers-ignoreHref"><span class="icon fa-th">Video Call</span></a></li>-->
+								<!--&lt;!&ndash;<li><a href="#about" id="about-link" class="skel-layers-ignoreHref"><span class="icon fa-user">About Me</span></a></li>&ndash;&gt;-->
+								<!--&lt;!&ndash;<li><a href="#contact" id="contact-link" class="skel-layers-ignoreHref"><span class="icon fa-envelope">Contact</span></a></li>&ndash;&gt;-->
+							<!--</ul>-->
+						<!--</nav>-->
+
+				<!--</div>-->
+
+				<!--<div class="bottom">-->
+
+					<!--&lt;!&ndash; Social Icons &ndash;&gt;-->
+						<!--<ul class="icons">-->
+							<!--&lt;!&ndash;<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>&ndash;&gt;-->
+							<!--&lt;!&ndash;<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>&ndash;&gt;-->
+							<!--<li><a href="https://github.com/hosoyamarcos/PCS2510.git" class="icon fa-github"><span class="label">Github</span></a></li>-->
+							<!--&lt;!&ndash;<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>&ndash;&gt;-->
+							<!--&lt;!&ndash;<li><a href="#" class="icon fa-envelope"><span class="label">Email</span></a></li>&ndash;&gt;-->
+						<!--</ul>-->
+
+				<!--</div>-->
+
+			<!--</div>-->
+
+		<!--&lt;!&ndash; Main &ndash;&gt;-->
+			<!--<div id="main">-->
+
+				<!--&lt;!&ndash; Intro &ndash;&gt;-->
+					<!--<section id="top" class="one dark cover">-->
 						<!--<div class="container">-->
-
-							<!--<header>-->
-								<!--<h2>Contact</h2>-->
-							<!--</header>-->
-
-							<!--<p>Elementum sem parturient nulla quam placerat viverra-->
-							<!--mauris non cum elit tempus ullamcorper dolor. Libero rutrum ut lacinia-->
-							<!--donec curae mus. Eleifend id porttitor ac ultricies lobortis sem nunc-->
-							<!--orci ridiculus faucibus a consectetur. Porttitor curae mauris urna mi dolor.</p>-->
-
-							<!--<form method="post" action="#">-->
-								<!--<div class="row">-->
-									<!--<div class="6u 12u$(mobile)"><input type="text" name="name" placeholder="Name" /></div>-->
-									<!--<div class="6u$ 12u$(mobile)"><input type="text" name="email" placeholder="Email" /></div>-->
-									<!--<div class="12u$">-->
-										<!--<textarea name="message" placeholder="Message"></textarea>-->
-									<!--</div>-->
-									<!--<div class="12u$">-->
-										<!--<input type="submit" value="Send Message" />-->
-									<!--</div>-->
+							<!--<form class=>-->
+								<!--<div class="form-group">-->
+									<!--<label>Username</label>-->
+									<!--<input type="text" placeholder="Register your username ..." ng-model="name">-->
 								<!--</div>-->
+								<!--<br>-->
+								<!--<a class="button" class="button" ng-click="register()">Register</a>-->
+
+								<!--<div class="form-group" >-->
+									<!--<label>Peer</label>-->
+									<!--<input type="text" placeholder="Who would you like to call? " ng-model="peer">-->
+								<!--</div>-->
+								<!--<br>-->
+
+								<!--<a href="#chat" class="button" ng-click="call()">Call</a>-->
+								<!--<a class="button" ng-click="stop()">Stop</a>-->
 							<!--</form>-->
+						<!--</div>-->
+					<!--</section>-->
+
+				<!--&lt;!&ndash; Portfolio &ndash;&gt;-->
+					<!--<section id="call" class="two">-->
+						<!--<div class="container">-->
+
+							<!--<header>-->
+								<!--<h2>Video Call</h2>-->
+							<!--</header>-->
+
+							<!--<div class="col-sm-12 col-md-12" >-->
+								<!--<div id="videoBig" class="pull-left">-->
+									<!--<video id="videoOutput" autoplay width="640px" height="480px" ></video>-->
+								<!--</div>-->
+								<!--<div id="videoSmall">-->
+									<!--<video muted id="videoInput" autoplay width="240px" height="180px" ></video>-->
+								<!--</div>-->
+							<!--</div>-->
+
 
 						<!--</div>-->
 					<!--</section>-->
 
-			</div>
+				<!--&lt;!&ndash; About Me &ndash;&gt;-->
+					<!--&lt;!&ndash;<section id="about" class="three">&ndash;&gt;-->
+						<!--&lt;!&ndash;<div class="container">&ndash;&gt;-->
 
-		<!-- Footer -->
-			<div id="footer">
+							<!--&lt;!&ndash;<header>&ndash;&gt;-->
+								<!--&lt;!&ndash;<h2>About Me</h2>&ndash;&gt;-->
+							<!--&lt;!&ndash;</header>&ndash;&gt;-->
 
-				<!-- Copyright -->
-					<ul class="copyright">
-						<li><i class="fa fa-comments" aria-hidden="true"></i></li><li><a href="https://github.com/hosoyamarcos/PCS2510.git">Repository</a></li>
-					</ul>
+							<!--&lt;!&ndash;<a href="#" class="image featured"><img src="images/pic08.jpg" alt="" /></a>&ndash;&gt;-->
 
-			</div>
+							<!--&lt;!&ndash;<p>Tincidunt eu elit diam magnis pretium accumsan etiam id urna. Ridiculus&ndash;&gt;-->
+							<!--&lt;!&ndash;ultricies curae quis et rhoncus velit. Lobortis elementum aliquet nec vitae&ndash;&gt;-->
+							<!--&lt;!&ndash;laoreet eget cubilia quam non etiam odio tincidunt montes. Elementum sem&ndash;&gt;-->
+							<!--&lt;!&ndash;parturient nulla quam placerat viverra mauris non cum elit tempus ullamcorper&ndash;&gt;-->
+							<!--&lt;!&ndash;dolor. Libero rutrum ut lacinia donec curae mus vel quisque sociis nec&ndash;&gt;-->
+							<!--&lt;!&ndash;ornare iaculis.</p>&ndash;&gt;-->
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/jquery.scrollzer.min.js"></script>
-			<script src="assets/js/skel.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-			<script src="assets/js/structure.js"></script>
+						<!--&lt;!&ndash;</div>&ndash;&gt;-->
+					<!--&lt;!&ndash;</section>&ndash;&gt;-->
+
+				<!--&lt;!&ndash; Contact &ndash;&gt;-->
+					<!--&lt;!&ndash;<section id="contact" class="four">&ndash;&gt;-->
+						<!--&lt;!&ndash;<div class="container">&ndash;&gt;-->
+
+							<!--&lt;!&ndash;<header>&ndash;&gt;-->
+								<!--&lt;!&ndash;<h2>Contact</h2>&ndash;&gt;-->
+							<!--&lt;!&ndash;</header>&ndash;&gt;-->
+
+							<!--&lt;!&ndash;<p>Elementum sem parturient nulla quam placerat viverra&ndash;&gt;-->
+							<!--&lt;!&ndash;mauris non cum elit tempus ullamcorper dolor. Libero rutrum ut lacinia&ndash;&gt;-->
+							<!--&lt;!&ndash;donec curae mus. Eleifend id porttitor ac ultricies lobortis sem nunc&ndash;&gt;-->
+							<!--&lt;!&ndash;orci ridiculus faucibus a consectetur. Porttitor curae mauris urna mi dolor.</p>&ndash;&gt;-->
+
+							<!--&lt;!&ndash;<form method="post" action="#">&ndash;&gt;-->
+								<!--&lt;!&ndash;<div class="row">&ndash;&gt;-->
+									<!--&lt;!&ndash;<div class="6u 12u$(mobile)"><input type="text" name="name" placeholder="Name" /></div>&ndash;&gt;-->
+									<!--&lt;!&ndash;<div class="6u$ 12u$(mobile)"><input type="text" name="email" placeholder="Email" /></div>&ndash;&gt;-->
+									<!--&lt;!&ndash;<div class="12u$">&ndash;&gt;-->
+										<!--&lt;!&ndash;<textarea name="message" placeholder="Message"></textarea>&ndash;&gt;-->
+									<!--&lt;!&ndash;</div>&ndash;&gt;-->
+									<!--&lt;!&ndash;<div class="12u$">&ndash;&gt;-->
+										<!--&lt;!&ndash;<input type="submit" value="Send Message" />&ndash;&gt;-->
+									<!--&lt;!&ndash;</div>&ndash;&gt;-->
+								<!--&lt;!&ndash;</div>&ndash;&gt;-->
+							<!--&lt;!&ndash;</form>&ndash;&gt;-->
+
+						<!--&lt;!&ndash;</div>&ndash;&gt;-->
+					<!--&lt;!&ndash;</section>&ndash;&gt;-->
+
+			<!--</div>-->
+
+		<!--&lt;!&ndash; Footer &ndash;&gt;-->
+			<!--<div id="footer">-->
+
+				<!--&lt;!&ndash; Copyright &ndash;&gt;-->
+					<!--<ul class="copyright">-->
+						<!--<li><i class="fa fa-comments" aria-hidden="true"></i></li><li><a href="https://github.com/hosoyamarcos/PCS2510.git">Repository</a></li>-->
+					<!--</ul>-->
+
+			<!--</div>-->
+
+		<!--&lt;!&ndash; Scripts &ndash;&gt;-->
+			<!--<script src="assets/js/jquery.min.js"></script>-->
+			<!--<script src="assets/js/jquery.scrolly.min.js"></script>-->
+			<!--<script src="assets/js/jquery.scrollzer.min.js"></script>-->
+			<!--<script src="assets/js/skel.min.js"></script>-->
+			<!--<script src="assets/js/util.js"></script>-->
+			<!--&lt;!&ndash;[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]&ndash;&gt;-->
+			<!--<script src="assets/js/structure.js"></script>-->
 
 	</body>
 </html>
