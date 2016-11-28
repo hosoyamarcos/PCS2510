@@ -117,6 +117,7 @@ var kurentoApp = angular.module('kurentoApp',[])
 
 		function resgisterResponse(message) {
 			if (message.response == 'accepted') {
+				swal("User name register", "", "success");
 				setRegisterState(REGISTERED);
 
 			} else {
@@ -124,9 +125,28 @@ var kurentoApp = angular.module('kurentoApp',[])
 				var errorMessage = message.message ? message.message
 					: 'Unknown reason for register rejection.';
 				console.log(errorMessage);
-				swal("Oh oh ...", 'Error registering user.', "error")
-				return;
-				alert('Error registering user. See console for further information.');
+				//swal("Oh oh ...", 'Error registering user.', "error")
+				//return;
+				//alert('Error registering user. See console for further information.');
+				var tittleMessage="Invalid user name";
+				var textMessage= "Write a new user name.";
+				var name = $scope.name;
+				console.log("Name"+name);
+				if (!name || name == '') {
+					tittleMessage="Name not found";
+					textMessage="Insert your user name";			
+				}
+
+				swal({
+				  title: tittleMessage,
+				  text: textMessage,
+				  type: "warning",
+				  showCancelButton: false,
+				  confirmButtonText: "Ok",
+				  closeOnConfirm: true
+				},
+				function(){
+				});
 			}
 		}
 
@@ -280,7 +300,17 @@ var kurentoApp = angular.module('kurentoApp',[])
 
 		$scope.call = function () {
 			if (!$scope.peer) {
-				swal("Oh oh ...", "You must insert the peer name", "error")
+				swal({
+				  title: "Peer not found",
+				  text: "Write the name of the peer",
+				  type: "warning",
+				  showCancelButton: false,
+				  confirmButtonClass: "btn-danger",
+				  confirmButtonText: "Ok",
+				  closeOnConfirm: true
+				},
+				function(){
+				});
 				return;
 			}
 
