@@ -63,25 +63,6 @@ var kurentoApp = angular.module('kurentoApp',[])
 			callState = nextState;
 		}
 
-		// window.onload = function() {
-		// 	console = new Console();
-		// 	setRegisterState(NOT_REGISTERED);
-		// 	var drag = new Draggabilly(document.getElementById('videoSmall'));
-		// 	videoInput = document.getElementById('videoInput');
-		// 	videoOutput = document.getElementById('videoOutput');
-		// 	document.getElementById('name').focus();
-        //
-		// 	document.getElementById('register').addEventListener('click', function() {
-		// 		register();
-		// 	});
-		// 	document.getElementById('call').addEventListener('click', function() {
-		// 		call();
-		// 	});
-		// 	document.getElementById('terminate').addEventListener('click', function() {
-		// 		stop();
-		// 	});
-		// }
-
 		window.onbeforeunload = function() {
 			ws.close();
 		}
@@ -217,48 +198,6 @@ var kurentoApp = angular.module('kurentoApp',[])
 					}
 				});
 
-			// if (confirm('User ' + message.from
-			// 		+ ' is calling you. Do you accept the call?')) {
-			// 	//showSpinner(videoInput, videoOutput);
-            //
-			// 	var options = {
-			// 		localVideo : videoInput,
-			// 		remoteVideo : videoOutput,
-			// 		onicecandidate : onIceCandidate
-			// 	}
-            //
-			// 	webRtcPeer = kurentoUtils.WebRtcPeer.WebRtcPeerSendrecv(options,
-			// 		function(error) {
-			// 			if (error) {
-			// 				console.error(error);
-			// 				setCallState(NO_CALL);
-			// 			}
-            //
-			// 			this.generateOffer(function(error, offerSdp) {
-			// 				if (error) {
-			// 					console.error(error);
-			// 					setCallState(NO_CALL);
-			// 				}
-			// 				var response = {
-			// 					id : 'incomingCallResponse',
-			// 					from : message.from,
-			// 					callResponse : 'accept',
-			// 					sdpOffer : offerSdp
-			// 				};
-			// 				sendMessage(response);
-			// 			});
-			// 		});
-            //
-			// } else {
-			// 	var response = {
-			// 		id : 'incomingCallResponse',
-			// 		from : message.from,
-			// 		callResponse : 'reject',
-			// 		message : 'user declined'
-			// 	};
-			// 	sendMessage(response);
-			// 	stop(true);
-			// }
 		}
 
 		$scope.register = function () {

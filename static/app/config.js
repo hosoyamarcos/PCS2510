@@ -5,7 +5,7 @@
 
 var kurentoApp = angular.module('kurentoApp', ['ui.router']);
 kurentoApp.config(function($stateProvider, $urlRouterProvider) {
-
+    var ws = new WebSocket('wss://' + location.host + '/one2one');
     $urlRouterProvider.otherwise('/login');
 
     $stateProvider
@@ -13,7 +13,9 @@ kurentoApp.config(function($stateProvider, $urlRouterProvider) {
     // HOME STATES AND NESTED VIEWS ========================================
         .state('login', {
             url: '/login',
-            templateUrl: './app/pages/login/login.html'
+            templateUrl: './app/pages/login/login.html',
+            controller: loginCtrl,
+            params: {ws: ws}
         })
 
         // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================

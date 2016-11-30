@@ -60,9 +60,11 @@ function nextUniqueId() {
  */
 
 // Represents caller and callee sessions
-function UserSession(id, name, ws) {
+function UserSession(id, user, ws) {
     this.id = id;
-    this.name = name;
+    this.email = user.email;
+    this.name = user.name;
+    this.password = user.password;
     this.ws = ws;
     this.peer = null;
     this.sdpOffer = null;
@@ -75,33 +77,33 @@ UserSession.prototype.sendMessage = function(message) {
 // Represents registrar of users
 function UserRegistry() {
     this.usersById = {};
-    this.usersByName = {};
+    this.usersByEmail = {};
 }
 
 UserRegistry.prototype.register = function(user) {
     this.usersById[user.id] = user;
-    this.usersByName[user.name] = user;
+    this.usersByEmail[user.email] = user;
 }
 
 UserRegistry.prototype.unregister = function(id) {
     var user = this.getById(id);
     if (user) delete this.usersById[id]
-    if (user && this.getByName(user.name)) delete this.usersByName[user.name];
+    if (user && this.getByEmail(user.email)) delete this.usersByEmail[user.email];
 }
 
 UserRegistry.prototype.getById = function(id) {
     return this.usersById[id];
 }
 
-UserRegistry.prototype.getByName = function(name) {
-    return this.usersByName[name];
+UserRegistry.prototype.getByEmail = function(email) {
+    return this.usersByEmail[email];
 }
 
 UserRegistry.prototype.removeById = function(id) {
     var userSession = this.usersById[id];
     if (!userSession) return;
     delete this.usersById[id];
-    delete this.usersByName[userSession.name];
+    delete this.usersByEmail[userSession.email];
 }
 
 // Represents a B2B active call
@@ -239,7 +241,7 @@ wss.on('connection', function(ws) {
 
         switch (message.id) {
         case 'register':
-            register(sessionId, message.name, ws);
+            register(sessionId, message.newUser, ws);
             break;
 
         case 'call':
@@ -412,20 +414,20 @@ function call(callerId, to, from, sdpOffer) {
     caller.sendMessage(message);
 }
 
-function register(id, name, ws, callback) {
+function register(id, user, ws, callback) {
     function onError(error) {
         ws.send(JSON.stringify({id:'registerResponse', response : 'rejected ', message: error}));
     }
 
-    if (!name) {
-        return onError("empty user name");
+    if (!user) {
+        return onError("empty user");
     }
 
-    if (userRegistry.getByName(name)) {
-        return onError("User " + name + " is already registered");
+    if (userRegistry.getByEmail(user.email)) {
+        return onError("User " + user.email + " is already registered");
     }
 
-    userRegistry.register(new UserSession(id, name, ws));
+    userRegistry.register(new UserSession(id, user, ws));
 
     var allUsers =[];
     for (var i in userRegistry.usersByName) {
