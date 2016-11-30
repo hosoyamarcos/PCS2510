@@ -85,6 +85,11 @@ UserRegistry.prototype.register = function(user) {
     this.usersByEmail[user.email] = user;
 }
 
+UserRegistry.prototype.registerIdOnly = function(user) {
+    this.usersById[user.id] = user;
+    //this.usersByEmail[user.email] = user;
+}
+
 UserRegistry.prototype.unregister = function(id) {
     var user = this.getById(id);
     if (user) delete this.usersById[id]
@@ -103,7 +108,7 @@ UserRegistry.prototype.removeById = function(id) {
     var userSession = this.usersById[id];
     if (!userSession) return;
     delete this.usersById[id];
-    delete this.usersByEmail[userSession.email];
+    //delete this.usersByEmail[userSession.email];
 }
 
 // Represents a B2B active call
@@ -259,6 +264,9 @@ wss.on('connection', function(ws) {
         case 'onIceCandidate':
             onIceCandidate(sessionId, message.candidate);
             break;
+
+        case 'login':
+            login(sessionId, message.user, ws);
 
         default:
             ws.send(JSON.stringify({
@@ -462,6 +470,36 @@ function onIceCandidate(sessionId, _candidate) {
         }
         candidatesQueue[sessionId].push(candidate);
     }
+}
+
+function login (id, userReq) {
+   // var user = userRegistry.getByEmail(userReq.email);
+    console.log(userRegistry.usersByEmail)
+    console.log('USER')
+
+    console.log(userRegistry.usersById)
+
+    for (var user_i =0 ; user_i < userRegistry.usersById.length ; user_i++) {
+        console.log('USEESS')
+    }
+
+    if (!user) {
+        console.log('not registered')
+        return
+    }
+
+
+
+
+    if (user.password == userReq.password) {
+        console.log('ok')
+        // ok
+    } else {
+        // error
+    }
+
+
+
 }
 
 app.use(express.static(path.join(__dirname, 'static')));

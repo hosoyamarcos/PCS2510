@@ -4,6 +4,21 @@
 function loginCtrl ($scope, $state, $stateParams) {
     var ws = $stateParams.ws;
 
+    $scope.signIn = function () {
+        var user = {
+            email: $scope.loginEmail,
+            password: $scope.loginPassword
+        }
+
+        var message = {
+            id : 'login',
+            user : user
+        };
+        sendMessage(message);
+    }
+
+
+
     $scope.signUp = function () {
         var newUser = {
             email: $scope.email,
@@ -40,8 +55,15 @@ function loginCtrl ($scope, $state, $stateParams) {
 
     function registerResponse(message) {
         if (message.response == 'accepted') {
-            swal("You were successfully registered", 'Click on "OK" and Log in', "success");
-
+            swal({
+                    title: "You were successfully registered",
+                    text: "Click on 'OK and Log in",
+                    type: "success"
+                },
+                function(){
+                    $('#signupbox').hide()
+                    $('#loginbox').show()
+                });
 
         } else {
             var errorMessage = message.message ? message.message

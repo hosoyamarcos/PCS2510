@@ -3,9 +3,11 @@
  */
 // app.js
 
+
+
+var ws = new WebSocket('wss://' + location.host + '/one2one');
 var kurentoApp = angular.module('kurentoApp', ['ui.router']);
 kurentoApp.config(function($stateProvider, $urlRouterProvider) {
-    var ws = new WebSocket('wss://' + location.host + '/one2one');
     $urlRouterProvider.otherwise('/login');
 
     $stateProvider
