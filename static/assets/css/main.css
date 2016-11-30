@@ -2032,7 +2032,7 @@ display: inline;
 			}
 
 		#header .icons {
-			font-size: 0.8em;
+			font-size: 1.5em;
 			text-align: center;
 		}
 
@@ -2134,6 +2134,7 @@ display: inline;
 		#footer .copyright {
 			cursor: default;
 			margin: 0;
+			text-align: center;
 		}
 
 			#footer .copyright li {
@@ -2142,6 +2143,7 @@ display: inline;
 				border-left: solid 1px rgba(128, 128, 128, 0.35);
 				padding: 0 0 0 0.5em;
 				margin: 0 0 0 0.5em;
+
 			}
 
 				#footer .copyright li:first-child {
@@ -2201,6 +2203,7 @@ display: inline;
 				background-color: rgb(255,255,255);
 				padding:0px 0px 0px 0px;
 				margin: 0px 0px 0px 0px;
+
 				/*background-image: url("../../images/banner.jpg");*/
 			}
 
@@ -2595,7 +2598,7 @@ div#videoSmall {
 
 
 /*Carousel*/
-.carousel-caption h3,p{
+.shadow{
 	 text-shadow: 2px 2px 4px #000000;
 	 font-family: "Arial", Helvetica, sans-serif;
 }
@@ -2618,4 +2621,33 @@ div#videoSmall {
 .pHowto{
 	text-shadow: none;
 	font-size: 1.3em;
+}
+
+#footer p{
+	text-shadow: none;
+	font-size: 1.3em;
+}
+
+.registro{
+	text-align: center;
+}
+
+#peer{
+	display: inline-block;
+	float:left;
+	width: 80%;
+}
+
+.form-group{
+	width: 70%;
+	text-align: center;
+	display: inline-block;
+}
+
+.addContact{
+	float:left;
+}
+
+.button-link{
+	color:#fff;
 }
