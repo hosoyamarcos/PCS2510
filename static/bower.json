@@ -25,6 +25,9 @@
     "demo-console": "1.5.1",
     "ekko-lightbox": "~3.3.0",
     "kurento-utils": "master",
-    "angular": "^1.5.8"
+    "angular": "^1.5.8",
+    "datatables.net-bs": "^1.10.12",
+    "datatables.net-scroller-bs": "^1.4.2",
+    "datatables.net-responsive-bs": "^2.1.0"
   }
 }

@@ -1,24 +1,35 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Prjeto PCS-2510</title>
+		<title>Projeto PCS-2510</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
-		<link rel="stylesheet" href="bower_components/sweetalert/dist/sweetalert.css">
 
-      <script src="bower_components/adapter.js/adapter.js"></script>
-      <script src="bower_components/jquery/dist/jquery.min.js"></script>
-      <script src="bower_components/angular/angular.min.js"></script>
-      <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+		<script src="bower_components/adapter.js/adapter.js"></script>
+		<script src="bower_components/jquery/dist/jquery.min.js"></script>
+		<script src="bower_components/angular/angular.min.js"></script>
+		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+
+		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="bower_components/sweetalert/dist/sweetalert.css">
+		<link rel="stylesheet" href="bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+		<link rel="stylesheet" href="bower_components/datatables.net-responsive-bs/css/responsive.bootstrap.min.css">
+		<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+
+
+
       <script src="bower_components/demo-console/index.js"></script>
       <script src="bower_components/draggabilly/dist/draggabilly.pkgd.min.js"></script>
       <script src="bower_components/ekko-lightbox/dist/ekko-lightbox.min.js"></script>
       <script src="bower_components/kurento-utils/js/kurento-utils.js"></script>
 	  <script src="bower_components/sweetalert/dist/sweetalert.min.js"></script>
+	  <script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+	  <script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
       <script src="app/main.js"></script>
 
 	</head>
@@ -31,7 +42,7 @@
 
 					<!-- Logo -->
 						<div id="logo">
-							<span class="image avatar48"><img src="images/video.png" alt="" /></span>
+							<!--<span class="image avatar48"><img src="images/video.png" alt="" /></span>-->
 							<h1 id="title">Projeto PCS2510</h1>
 							<p>Using WebRTC</p>
 						</div>
@@ -53,7 +64,7 @@
 							-->
 							<ul>
 								<li><a href="#top" id="top-link" class="skel-layers-ignoreHref"><span class="icon fa-home">Intro</span></a></li>
-								<li><a href="#call" id="portfolio-link" class="skel-layers-ignoreHref"><span class="icon fa-th">Video Call</span></a></li>
+								<li><a href="#call" id="call-link" class="skel-layers-ignoreHref"><span class="icon fa-th">Video Call</span></a></li>
 								<!--<li><a href="#about" id="about-link" class="skel-layers-ignoreHref"><span class="icon fa-user">About Me</span></a></li>-->
 								<!--<li><a href="#contact" id="contact-link" class="skel-layers-ignoreHref"><span class="icon fa-envelope">Contact</span></a></li>-->
 							</ul>
@@ -61,7 +72,7 @@
 
 				</div>
 
-				<div class="bottom">
+				<div class="bottom" >
 
 					<!-- Social Icons -->
 						<ul class="icons">
@@ -88,15 +99,15 @@
 									<input type="text" placeholder="Register your username ..." ng-model="name">
 								</div>
 								<br>
-								<a class="button" class="button" ng-click="register()">Register</a>
+								<a class="button" ng-click="register()">Register</a>
 
-								<div class="form-group" >
+								<div class="form-group">
 									<label>Peer</label>
 									<input type="text" placeholder="Who would you like to call? " ng-model="peer">
 								</div>
 								<br>
 
-								<a href="#chat" class="button" ng-click="call()">Call</a>
+								<a href="#call" class="button" ng-click="call()">Call</a>
 								<a class="button" ng-click="stop()">Stop</a>
 							</form>
 						</div>
@@ -124,24 +135,43 @@
 					</section>
 
 				<!-- About Me -->
-					<!--<section id="about" class="three">-->
-						<!--<div class="container">-->
+					<section id="about" class="three">
+						<div class="container">
 
-							<!--<header>-->
-								<!--<h2>About Me</h2>-->
-							<!--</header>-->
+							<header>
+								<h2>My contacts</h2>
+							</header>
+							<table class="table table-striped table-bordered table-hover dataTables-example" >
+								<thead>
+								<tr>
+									<th>Name</th>
+									<th>Email</th>
+									<th>Send email</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr class="gradeX">
+									<td><a>Trident</a></td>
+									<td>Internet
+										Explorer 4.0
+									</td>
+									<th><a><i class="fa fa-envelope-o" aria-hidden="true"></i></a></th>
+								</tr>
+								<tr class="gradeC">
+									<td><a>Trident</a></td>
+									<td>Internet
+										Explorer 5.0
+									</td>
+									<th><a><i class="fa fa-envelope-o" aria-hidden="true"></i></a></th>
+								</tr>
 
-							<!--<a href="#" class="image featured"><img src="images/pic08.jpg" alt="" /></a>-->
 
-							<!--<p>Tincidunt eu elit diam magnis pretium accumsan etiam id urna. Ridiculus-->
-							<!--ultricies curae quis et rhoncus velit. Lobortis elementum aliquet nec vitae-->
-							<!--laoreet eget cubilia quam non etiam odio tincidunt montes. Elementum sem-->
-							<!--parturient nulla quam placerat viverra mauris non cum elit tempus ullamcorper-->
-							<!--dolor. Libero rutrum ut lacinia donec curae mus vel quisque sociis nec-->
-							<!--ornare iaculis.</p>-->
 
-						<!--</div>-->
-					<!--</section>-->
+								</tfoot>
+							</table>
+
+						</div>
+					</section>
 
 				<!-- Contact -->
 					<!--<section id="contact" class="four">-->
@@ -191,7 +221,7 @@
 			<script src="assets/js/skel.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-			<script src="assets/js/structure.js"></script>
+			<script src="assets/js/main.js"></script>
 
 	</body>
 </html>
