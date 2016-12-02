@@ -7,6 +7,7 @@ var kurentoApp = angular.module('kurentoApp',[])
 		videoInput = document.getElementById('videoInput');
 		videoOutput = document.getElementById('videoOutput');
 		$scope.allUsersList = [];
+		$scope.muted= false
 
 
 		$scope.contacts = [];
@@ -22,6 +23,22 @@ var kurentoApp = angular.module('kurentoApp',[])
 
 		$scope.addFriend = function () {
 			$scope.contacts.push({name: $scope.newName, email: $scope.newEmail})
+		}
+
+		$scope.selectPeer = function(peer) {
+			$scope.peer = peer
+		}
+
+		$scope.mute = function () {
+			var remoteVideo = document.getElementById('videoOutput')
+			if($scope.muted == true) {
+				remoteVideo.muted = false
+				$scope.muted = false
+			} else {
+				remoteVideo.muted = true;
+				$scope.muted= true;
+			}
+
 		}
 
 		var registerName = null;

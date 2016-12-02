@@ -131,7 +131,7 @@
 							</thead>
 							<tbody>
 							<tr class="gradeX" ng-repeat="contact in contacts">
-								<td><a>{{contact.name}}</a></td>
+								<td><a ng-click="selectPeer(contact.name)">{{contact.name}}</a></td>
 								<td>{{contact.email}}</td>
 								<th><a><i class="fa fa-envelope-o" aria-hidden="true"></i></a></th>
 							</tr>
@@ -181,7 +181,9 @@
 							</div>
 
 							<div>
-								<a class="button inline" ng-click="stop()"><i class="fa fa-stop" aria-hidden="true"></i> Stop</a>
+								<a class="button" ng-click="stop()"><i class="fa fa-stop" aria-hidden="true"></i> Stop</a>
+								<a class="button" ng-show="!muted" ng-click="mute()"> <i class="fa fa-volume-off" aria-hidden="true"></i> Mute</a>
+								<a class="button"  ng-show="muted" ng-click="mute()"> <i class="fa fa-volume-up" aria-hidden="true"></i> Unmute</a>
 							</div>
 
 
