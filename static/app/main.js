@@ -8,6 +8,22 @@ var kurentoApp = angular.module('kurentoApp',[])
 		videoOutput = document.getElementById('videoOutput');
 		$scope.allUsersList = [];
 
+
+		$scope.contacts = [];
+
+		$scope.showNewUser = false
+		$scope.addUser = function() {
+			if(!$scope.showNewUser) {
+				$scope.showNewUser = true
+			} else {
+				$scope.showNewUser = false
+			}
+		}
+
+		$scope.addFriend = function () {
+			$scope.contacts.push({name: $scope.newName, email: $scope.newEmail})
+		}
+
 		var registerName = null;
 		const NOT_REGISTERED = 0;
 		const REGISTERING = 1;
